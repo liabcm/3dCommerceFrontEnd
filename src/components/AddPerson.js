@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate,useParams } from 'react-router-dom'
 
 const AddPerson = () => {
     const[addPerson, setAddPerson]= useState()
@@ -14,10 +15,13 @@ const AddPerson = () => {
     const[isPrinter, setIsPrinter] = useState(0)
     const[isDesigner, setIsDesigner] = useState(0)
 
-    const test=()=>{
+    let navigate = useNavigate();
+
+
+    const test=  ()=>{
         setAddPerson({firstName,lastName,address,city,state,zipCode,email,phone,isBuyer,isPrinter,isDesigner})
         console.log(JSON.stringify(addPerson))
-        fetch('https://localhost:44377/person', {
+         fetch('https://localhost:44377/person', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -26,10 +30,12 @@ const AddPerson = () => {
         })
         .then(response => response.json())
         .then(data => {
-        console.log( data);
+        console.log(data);
         // setIsPrinter(0)
         // setIsBuyer(0)
         // setIsDesigner(0)
+        let id = data
+        navigate(`/profile/${id}`)
 })
     }
 
@@ -47,9 +53,13 @@ const AddPerson = () => {
              {/* <input type='checkbox' checked={isBuyer===1?true:false} value={isBuyer} onChange={setIsBuyer(1)}/>
             <input type='checkbox' value={isPrinter} onChange={setIsPrinter(1)}/>
             <input type='checkbox' value={isDesigner} onChange={setIsDesigner(1)}/><br/>  */}
-            <button onClick={test}>add person</button>
+            <button onClick={()=>{
+                test();
+            }
+            }>add person</button>
         </div>
     )
 }
 
 export default AddPerson
+//,()=>navigate("/profile/:id")
