@@ -30,21 +30,15 @@ const Profile = () => {
 
 useEffect(()=>getPeople(),[url])
 
-
-
-//JSON.parse(data))
     return (
         <div>
-            {/* <input type='number' value={id} onChange={(e)=>setId(e.target.value)}/>
-            <button onClick={getPeople}>get people</button> */}
-    
               {people.map(person => 
               <div key={person.id}>
                     <p>First Name: {person.firstName}</p>
                     <p>Last Name: {person.lastName}</p>
                     <p>City: {person.city}</p>
                     <p>State: {person.state}</p>
-                    <div style={{borderTop:'1px solid #5f656d',height:'1px',margin:'16px 0'}}/>             
+                    <div style={{borderTop:'1px solid #5f656d',height:'1px',margin:'16px 0'}}/>  
               </div>     
                 )}
                 <button onClick={editProfile}>Edit</button>

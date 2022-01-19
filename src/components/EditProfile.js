@@ -1,5 +1,6 @@
 import { useState } from 'react/cjs/react.development'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const EditProfile = () => {
 
@@ -15,6 +16,7 @@ const EditProfile = () => {
         phone:''
     })
 
+    const navigate=useNavigate()
 
     const getEditProfile = ()=>{
         
@@ -34,6 +36,7 @@ const EditProfile = () => {
         })
         .then(response=>response.json)
         .then(data=>console.log(data))
+        navigate(`/profile/${editProfile.id}`)
     }
       
 
@@ -65,7 +68,7 @@ const EditProfile = () => {
             <input type='text' value={editProfile.phone} onChange={(e)=>setEditProfile(previousState=>{
                 return{...previousState,phone: e.target.value}
             })}/><br/>
-            <button onClick={()=>updateProfile()}>click</button>
+            <button onClick={()=>updateProfile()}>save</button>
         </div>
     )
 }
